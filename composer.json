@@ -1,0 +1,30 @@
+{
+  "name": "johnxu/payment",
+  "description": "payment package",
+  "keywords": [
+    "payment",
+    "许发君",
+    "johnxu",
+    "支付开发"
+  ],
+  "homepage": "https://www.johnxu.net",
+  "authors": [
+    {
+      "name": "johnxu",
+      "email": "fsyzxz@163.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "johnxu/tool": "*",
+    "ext-openssl": "*",
+    "ext-json": "*",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {},
+  "autoload": {
+    "psr-4": {
+      "johnxu\\payment\\": "src/"
+    }
+  }
+}
