@@ -19,12 +19,17 @@
     "johnxu/tool": "*",
     "ext-openssl": "*",
     "ext-json": "*",
-    "ext-mbstring": "*"
+    "ext-mbstring": "*",
+    "ext-simplexml": "*",
+    "ext-libxml": "*"
   },
   "require-dev": {},
   "autoload": {
     "psr-4": {
       "johnxu\\payment\\": "src/"
-    }
+    },
+    "files": [
+      "src/phpqrcode/phpqrcode.php"
+    ]
   }
 }

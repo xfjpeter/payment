@@ -13,13 +13,17 @@
 
 namespace johnxu\payment\alipay;
 
-use johnxu\tool\Config;
 use johnxu\payment\Exception;
+use johnxu\tool\Config;
 
 /**
  * Class Pay
  *
  * @method web(array $businessParams)
+ * @method transfer(array $businessParams)
+ * @method app(array $businessParams)
+ * @method face(array $businessParams)
+ * @method wap(array $businessParams)
  *
  * @package johnxu\payment\alipay
  */

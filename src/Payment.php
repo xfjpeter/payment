@@ -29,15 +29,23 @@ class Payment
         if ( $config )
         {
             Config::getInstance()->batch( $config );
-            // Set Request URI
-            if ( Config::getInstance()->has( 'alipay.dev', false ) )
-            {
-                Config::getInstance()->set( 'alipay.uri', 'https://openapi.alipaydev.com/gateway.do' );
-            }
-            else
-            {
-                Config::getInstance()->set( 'alipay.uri', 'https://openapi.alipay.com/gateway.do' );
-            }
+        }
+        // Set Request URI
+        if ( Config::getInstance()->has( 'alipay.dev' ) )
+        {
+            Config::getInstance()->set( 'alipay.uri', 'https://openapi.alipaydev.com/gateway.do' );
+        }
+        else
+        {
+            Config::getInstance()->set( 'alipay.uri', 'https://openapi.alipay.com/gateway.do' );
+        }
+        if ( Config::getInstance()->has( 'wxpay.dev' ) )
+        {
+            Config::getInstance()->set( 'wxpay.uri', 'https://api.mch.weixin.qq.com/sandbox/' );
+        }
+        else
+        {
+            Config::getInstance()->set( 'wxpay.uri', 'https://api.mch.weixin.qq.com/' );
         }
     }
 
@@ -80,7 +88,7 @@ class Payment
     /**
      * @param string $method
      *
-     * @return mixed
+     * @return mixed|\johnxu\payment\wxpay\Query|\johnxu\payment\alipay\Query
      * @throws Exception
      */
     public function query( string $method = 'alipay' )
@@ -88,7 +96,7 @@ class Payment
         $namespace = "\\johnxu\\payment\\{$method}\\Query";
         if ( !class_exists( $namespace ) )
         {
-            throw new Exception( 'Pay class not found.' );
+            throw new Exception( 'Query class not found.' );
         }
 
         $class = new $namespace;
@@ -99,7 +107,7 @@ class Payment
     /**
      * @param string $method
      *
-     * @return mixed
+     * @return mixed|\johnxu\payment\wxpay\Trade|\johnxu\payment\alipay\Trade
      * @throws Exception
      */
     public function trade( string $method = 'alipay' )
@@ -107,7 +115,26 @@ class Payment
         $namespace = "\\johnxu\\payment\\{$method}\\Trade";
         if ( !class_exists( $namespace ) )
         {
-            throw new Exception( 'Pay class not found.' );
+            throw new Exception( 'Trade class not found.' );
+        }
+
+        $class = new $namespace;
+
+        return $class;
+    }
+
+    /**
+     * @param string $method
+     *
+     * @return mixed|\johnxu\payment\wxpay\Verify|\johnxu\payment\alipay\Verify
+     * @throws Exception
+     */
+    public function verify( string $method = 'alipay' )
+    {
+        $namespace = "\\johnxu\\payment\\{$method}\\Verify";
+        if ( !class_exists( $namespace ) )
+        {
+            throw new Exception( 'Verify class not found.' );
         }
 
         $class = new $namespace;

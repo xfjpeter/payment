@@ -19,7 +19,9 @@ use johnxu\payment\Exception;
 /**
  * Class Pay
  *
- * @method web(array $businessParams)
+ * @method close(array $businessParams)
+ * @method refund(array $businessParams)
+ * @method cancel(array $businessParams)
  *
  * @package johnxu\payment\alipay
  */

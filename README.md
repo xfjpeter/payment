@@ -44,3 +44,15 @@ composer require johnxu/payment
 ```
 
 ### 已经开发完成接口
+
+1. 扫码支付，[demo](https://github.com/xfjpeter/payment/tree/master/demo/wxpay/pay/web.php)
+
+2. app支付，[demo](https://github.com/xfjpeter/payment/tree/master/demo/wxpay/pay/app.php)
+
+3. 小程序支付，[demo](https://github.com/xfjpeter/payment/tree/master/demo/wxpay/pay/mini.php)
+
+4. H5支付，[demo](https://github.com/xfjpeter/payment/tree/master/demo/wxpay/pay/wap.php)
+
+5. 企业转账到零钱，[demo](https://github.com/xfjpeter/payment/tree/master/demo/wxpay/pay/transfer.php)
+
+6. 当面付，[demo](https://github.com/xfjpeter/payment/tree/master/demo/wxpay/pay/face.php)

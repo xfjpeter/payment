@@ -1,8 +1,15 @@
 <?php
 
 return array(
-    'wx'     => array(
-        'app_id' => '',
+    'wxpay'  => array(
+        'dev'        => true,
+        'app_id'     => 'wx426b3015555a46be',
+        'mch_id'     => '1900009851',
+        'key'        => '8934e7d15453e97507ef794cf7b0519d',
+        'sign_type'  => 'HMAC-SHA256', // 签名类型，默认为MD5，支持HMAC-SHA256和MD5。
+        'secret'     => '7813490da6f1265e4901ffb80afaa36f',
+        'notify_url' => 'http://pay.johnxu.net/demo/notify_url.php',
+        'return_url' => 'http://pay.johnxu.net/demo/return_url.php'
     ),
     'alipay' => array(
         'debug'               => true,
