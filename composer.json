@@ -21,8 +21,7 @@
     "ext-json": "*",
     "ext-mbstring": "*",
     "ext-simplexml": "*",
-    "ext-libxml": "*",
-    "johnxu/pay": "^1.0"
+    "ext-libxml": "*"
   },
   "require-dev": {},
   "autoload": {
