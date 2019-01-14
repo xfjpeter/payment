@@ -7,7 +7,7 @@
  * | ---------------------------------------------------------------------------------------------------
  * | Data: 2019/1/13
  * | ---------------------------------------------------------------------------------------------------
- * | Desc: Web scan
+ * | Desc: Mini
  * | ---------------------------------------------------------------------------------------------------
  */
 
@@ -18,7 +18,7 @@ use johnxu\payment\wxpay\Fire;
 use johnxu\payment\wxpay\Support;
 use johnxu\tool\Config;
 
-class App extends Fire
+class Mini extends Fire
 {
     /**
      * @param string $params
@@ -34,15 +34,16 @@ class App extends Fire
         {
             if ( Support::verifySignature( (array) $result, $result->sign ) )
             {
-                $return = array(
-                    'appid'     => Config::getInstance()->get( 'wxpay.app_id' ),
-                    'partnerid' => Config::getInstance()->get( 'wxpay_mch_id' ),
-                    'prepay_id' => $result->prepay_id,
-                    'package'   => 'Sign=WXPay',
-                    'noncestr'  => Support::getRandStr(),
-                    'timestamp' => time(),
+                $return            = array(
+                    'appId'     => Config::getInstance()->get( 'wxpay.app_id' ),
+                    'timeStamp' => time(),
+                    'nonceStr'  => Support::getRandStr(),
+                    'package'   => "prepay_id={$result->prepay_id}",
+                    'signType'  => Config::getInstance()->get( 'sign_type', 'MD5' )
                 );
-                $return = Support::signature( $return );
+                $return            = Support::signature( $return );
+                $return['paySign'] = $return['sign'];
+                unset( $return['sign'] );
 
                 return json_encode( $return, JSON_UNESCAPED_UNICODE );
             }
@@ -59,7 +60,7 @@ class App extends Fire
 
     protected function getTradeType()
     {
-        return 'APP';
+        return 'JSAPI';
     }
 
     protected function getUri()

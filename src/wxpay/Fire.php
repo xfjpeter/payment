@@ -60,7 +60,6 @@ class Fire
      * @param $params
      *
      * @return mixed
-     * @throws \johnxu\payment\Exception
      * @throws \Exception
      */
     public function run( array $params )
