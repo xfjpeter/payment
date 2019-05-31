@@ -43,7 +43,7 @@ class Verify
      */
     public function notify()
     {
-        $this->data = file_get_contents( 'php://input' );
+        $this->data = file_get_contents('php://input');
 
         return $this->validation();
     }
@@ -53,8 +53,8 @@ class Verify
      */
     private function validation()
     {
-        $this->data = Support::xmlToArray( $this->data );
+        $this->data = Support::xmlToArray($this->data);
 
-        return Support::verifySignature( (array) $this->data, $this->data->sign ) ? $this->data : false;
+        return Support::verifySignature((array)$this->data, $this->data->sign) ? $this->data : false;
     }
 }

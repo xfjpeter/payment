@@ -26,16 +26,13 @@ class Web extends Fire
      * @throws Exception
      * @throws \Exception
      */
-    protected function request( string $params )
+    protected function request(string $params)
     {
-        $result = parent::request( $params );
-        if ( $result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS' )
-        {
-            \QRcode::png( $result->code_url, false, QR_ECLEVEL_H );
-        }
-        else
-        {
-            throw new Exception( 'return_code:' . $result->return_code . ',return_msg:' . $result->return_msg );
+        $result = parent::request($params);
+        if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS') {
+            \QRcode::png($result->code_url, false, QR_ECLEVEL_H);
+        } else {
+            throw new Exception('return_code:' . $result->return_code . ',return_msg:' . $result->return_msg);
         }
     }
 

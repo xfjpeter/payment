@@ -27,17 +27,16 @@ class Fire
      * @return mixed
      * @throws \Exception
      */
-    public function pay( array $params )
+    public function pay(array $params)
     {
-        if ( method_exists( $this, 'getTradeType' ) )
-        {
+        if (method_exists($this, 'getTradeType')) {
             $params['trade_type'] = $this->getTradeType();
         }
-        $params = Support::signature( $params );
+        $params = Support::signature($params);
         // 转换成xml
-        $paramsXml = Support::arrayToXml( $params );
+        $paramsXml = Support::arrayToXml($params);
 
-        return $this->request( $paramsXml );
+        return $this->request($paramsXml);
     }
 
     /**
@@ -46,14 +45,14 @@ class Fire
      * @return mixed
      * @throws \Exception
      */
-    protected function request( string $params )
+    protected function request(string $params)
     {
-        $uri      = Config::getInstance()->get( 'wxpay.uri' ) . $this->getUri();
-        $response = Http::getInstance()->request( $uri, $params, 'post' );
+        $uri      = Config::getInstance()->get('wxpay.uri') . $this->getUri();
+        $response = Http::getInstance()->request($uri, $params, 'post');
 
-        $data = $response->get( 'data' );
+        $data = $response->get('data');
 
-        return Support::xmlToArray( $data );
+        return Support::xmlToArray($data);
     }
 
     /**
@@ -62,18 +61,18 @@ class Fire
      * @return mixed
      * @throws \Exception
      */
-    public function run( array $params )
+    public function run(array $params)
     {
         $params['method'] = $this->getMethod();
 
-        $params = Support::signature( $params );
+        $params = Support::signature($params);
 
-        $uri = Config::getInstance()->get( 'wxpay.uri' );
+        $uri = Config::getInstance()->get('wxpay.uri');
 
-        $response = Http::getInstance()->request( $uri, http_build_query( $params ), 'post' );
+        $response = Http::getInstance()->request($uri, http_build_query($params), 'post');
 
-        $data = mb_convert_encoding( $response->get( 'data' ), 'utf-8', 'gbk' );
+        $data = mb_convert_encoding($response->get('data'), 'utf-8', 'gbk');
 
-        return json_decode( $data );
+        return json_decode($data);
     }
 }

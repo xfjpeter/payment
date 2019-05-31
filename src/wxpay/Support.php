@@ -29,14 +29,14 @@ class Support
      *
      * @return array
      */
-    public static function signature( array $data )
+    public static function signature(array $data)
     {
-        $stringParam    = self::getParam( $data );
-        $key            = Config::getInstance()->get( 'wxpay.key' );
+        $stringParam    = self::getParam($data);
+        $key            = Config::getInstance()->get('wxpay.key');
         $stringSignTemp = $stringParam . '&key=' . $key;
-        $signType       = Config::getInstance()->get( 'wxpay.sign_type', 'MD5' );
-        $data['sign']   = strtoupper( $signType ) == 'MD5' ? md5( $stringSignTemp ) : hash_hmac( 'sha256', $stringSignTemp, $key );
-        $data['sign']   = strtoupper( $data['sign'] );
+        $signType       = Config::getInstance()->get('wxpay.sign_type', 'MD5');
+        $data['sign']   = strtoupper($signType) == 'MD5' ? md5($stringSignTemp) : hash_hmac('sha256', $stringSignTemp, $key);
+        $data['sign']   = strtoupper($data['sign']);
 
         return $data;
     }
@@ -47,11 +47,11 @@ class Support
      *
      * @return bool
      */
-    public static function verifySignature( array $data, string $signature )
+    public static function verifySignature(array $data, string $signature)
     {
-        $sign = self::signature( $data );
+        $sign = self::signature($data);
 
-        return boolval( $sign['sign'] == $signature );
+        return boolval($sign['sign'] == $signature);
     }
 
     /**
@@ -62,19 +62,17 @@ class Support
      *
      * @return string
      */
-    public static function getParam( array &$data )
+    public static function getParam(array &$data)
     {
-        ksort( $data );
+        ksort($data);
         $stringParam = '';
-        foreach ( $data as $key => $item )
-        {
-            if ( $key != 'sign' && $item != '' )
-            {
+        foreach ($data as $key => $item) {
+            if ($key != 'sign' && $item != '') {
                 $stringParam .= "$key=$item&";
             }
         }
 
-        return trim( $stringParam, '&' );
+        return trim($stringParam, '&');
     }
 
     /**
@@ -84,13 +82,12 @@ class Support
      *
      * @return string
      */
-    public static function getRandStr( int $length = 16 )
+    public static function getRandStr(int $length = 16)
     {
         $str    = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         $random = '';
-        for ( $i = 0; $i < $length; $i++ )
-        {
-            $random .= $str[mt_rand( 0, strlen( $str ) - 1 )];
+        for ($i = 0; $i < $length; $i++) {
+            $random .= $str[mt_rand(0, strlen($str) - 1)];
         }
 
         return $random;
@@ -103,17 +100,13 @@ class Support
      *
      * @return string
      */
-    public static function arrayToXml( array $arr ): string
+    public static function arrayToXml(array $arr): string
     {
         $xml = '<xml>';
-        foreach ( $arr as $key => $item )
-        {
-            if ( is_numeric( $key ) )
-            {
+        foreach ($arr as $key => $item) {
+            if (is_numeric($key)) {
                 $xml .= "<{$key}>{$item}</{$key}>";
-            }
-            else
-            {
+            } else {
                 $xml .= "<{$key}><![CDATA[{$item}]]></{$key}>";
             }
         }
@@ -129,11 +122,11 @@ class Support
      *
      * @return object
      */
-    public static function xmlToArray( string $xml )
+    public static function xmlToArray(string $xml)
     {
-        libxml_disable_entity_loader( true );
+        libxml_disable_entity_loader(true);
 
-        return json_decode( json_encode( simplexml_load_string( $xml, 'SimpleXMLElement', LIBXML_NOCDATA ) ) );
+        return json_decode(json_encode(simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA)));
     }
 
     /**
@@ -144,13 +137,10 @@ class Support
     public static function getClientIp(): string
     {
         $realIp = 'unknown';
-        if ( $_SERVER['REMOTE_ADDR'] )
-        {
+        if ($_SERVER['REMOTE_ADDR']) {
             $realIp = $_SERVER['REMOTE_ADDR'];
-        }
-        elseif ( getenv( 'REMOTE_ADDR' ) )
-        {
-            $realIp = getenv( 'REMOTE_ADDR' );
+        } elseif (getenv('REMOTE_ADDR')) {
+            $realIp = getenv('REMOTE_ADDR');
         }
 
         return $realIp;

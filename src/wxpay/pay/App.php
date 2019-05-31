@@ -26,34 +26,28 @@ class App extends Fire
      * @return array|mixed
      * @throws Exception
      */
-    protected function request( string $params )
+    protected function request(string $params)
     {
-        $result = parent::request( $params );
+        $result = parent::request($params);
 
-        if ( $result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS' )
-        {
-            if ( Support::verifySignature( (array) $result, $result->sign ) )
-            {
+        if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS') {
+            if (Support::verifySignature((array)$result, $result->sign)) {
                 $return = array(
-                    'appid'     => Config::getInstance()->get( 'wxpay.app_id' ),
-                    'partnerid' => Config::getInstance()->get( 'wxpay_mch_id' ),
+                    'appid'     => Config::getInstance()->get('wxpay.app_id'),
+                    'partnerid' => Config::getInstance()->get('wxpay_mch_id'),
                     'prepay_id' => $result->prepay_id,
                     'package'   => 'Sign=WXPay',
                     'noncestr'  => Support::getRandStr(),
                     'timestamp' => time(),
                 );
-                $return = Support::signature( $return );
+                $return = Support::signature($return);
 
-                return json_encode( $return, JSON_UNESCAPED_UNICODE );
+                return json_encode($return, JSON_UNESCAPED_UNICODE);
+            } else {
+                throw new Exception('Verify signature fail.');
             }
-            else
-            {
-                throw new Exception( 'Verify signature fail.' );
-            }
-        }
-        else
-        {
-            throw new Exception( 'return_code:' . $result->return_code . ',return_msg:' . $result->return_msg );
+        } else {
+            throw new Exception('return_code:' . $result->return_code . ',return_msg:' . $result->return_msg);
         }
     }
 

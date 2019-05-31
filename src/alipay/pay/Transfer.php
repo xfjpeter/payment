@@ -23,9 +23,9 @@ class Transfer extends Fire
      * @return mixed
      * @throws \Exception
      */
-    protected function request( array $params )
+    protected function request(array $params)
     {
-        return $this->httpRequest( $params );
+        return $this->httpRequest($params);
     }
 
     protected function getMethod(): string

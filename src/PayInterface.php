@@ -15,5 +15,5 @@ namespace johnxu\payment;
 
 interface PayInterface
 {
-    public function web( array $businessParams );
+    public function web(array $businessParams);
 }

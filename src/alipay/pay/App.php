@@ -17,9 +17,9 @@ use johnxu\payment\alipay\Fire;
 
 class App extends Fire
 {
-    protected function request( array $params )
+    protected function request(array $params)
     {
-        return http_build_query( $params );
+        return http_build_query($params);
     }
 
     protected function getProductCode(): string

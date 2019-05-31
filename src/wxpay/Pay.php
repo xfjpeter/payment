@@ -41,18 +41,17 @@ class Pay
      * @return mixed
      * @throws Exception
      */
-    public function __call( $name, $arguments )
+    public function __call($name, $arguments)
     {
-        $name      = ucfirst( $name );
+        $name      = ucfirst($name);
         $namespace = "\\johnxu\\payment\\wxpay\\pay\\{$name}";
-        if ( !class_exists( $namespace ) )
-        {
-            throw new Exception( "$name class not found." );
+        if (!class_exists($namespace)) {
+            throw new Exception("$name class not found.");
         }
         $class                = new $namespace();
         $this->businessParams = $arguments[0];
 
-        return $class->pay( $this->params() );
+        return $class->pay($this->params());
     }
 
     /**
@@ -63,15 +62,15 @@ class Pay
     private function params()
     {
         $this->params = array(
-            'appid'            => Config::getInstance()->get( 'wxpay.app_id' ),
-            'mch_id'           => Config::getInstance()->get( 'wxpay.mch_id' ),
+            'appid'            => Config::getInstance()->get('wxpay.app_id'),
+            'mch_id'           => Config::getInstance()->get('wxpay.mch_id'),
             'nonce_str'        => Support::getRandStr(),
-            'sign_type'        => Config::getInstance()->get( 'wxpay.sign_type', 'MD5' ),
+            'sign_type'        => Config::getInstance()->get('wxpay.sign_type', 'MD5'),
             'spbill_create_ip' => Support::getClientIp(),
-            'return_url'       => Config::getInstance()->get( 'wxpay.return_url' ),
-            'notify_url'       => Config::getInstance()->get( 'wxpay.notify_url' )
+            'return_url'       => Config::getInstance()->get('wxpay.return_url'),
+            'notify_url'       => Config::getInstance()->get('wxpay.notify_url')
         );
-        $this->params = array_merge( $this->params, $this->businessParams );
+        $this->params = array_merge($this->params, $this->businessParams);
 
         return $this->params;
     }

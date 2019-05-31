@@ -25,32 +25,27 @@ class Wap extends Fire
      * @return mixed
      * @throws Exception
      */
-    public function pay( array $params )
+    public function pay(array $params)
     {
-        if ( !isset( $params['wap_url'] ) )
-        {
-            throw new Exception( '[wap_url] parameters cannot be null' );
+        if (!isset($params['wap_url'])) {
+            throw new Exception('[wap_url] parameters cannot be null');
         }
-        if ( !isset( $params['wap_name'] ) )
-        {
-            throw new Exception( '[wap_name] parameters cannot be null' );
+        if (!isset($params['wap_name'])) {
+            throw new Exception('[wap_name] parameters cannot be null');
         }
-        $params['scene_info'] = json_encode( array(
+        $params['scene_info'] = json_encode(array(
             'h5_info' => array(
                 'type'     => 'Wap',
                 'wap_url'  => $params['wap_url'],
                 'wap_name' => $params['wap_name']
             )
-        ), JSON_UNESCAPED_UNICODE );
-        unset( $params['wap_url'], $params['wap_name'] );
+        ), JSON_UNESCAPED_UNICODE);
+        unset($params['wap_url'], $params['wap_name']);
 
-        try
-        {
-            return parent::pay( $params );
-        }
-        catch ( \Exception $e )
-        {
-            throw new Exception( $e->getMessage() );
+        try {
+            return parent::pay($params);
+        } catch (\Exception $e) {
+            throw new Exception($e->getMessage());
         }
     }
 
