@@ -37,7 +37,7 @@ class Mini extends Fire
                     'timeStamp' => time(),
                     'nonceStr'  => Support::getRandStr(),
                     'package'   => "prepay_id={$result->prepay_id}",
-                    'signType'  => Config::getInstance()->get('wxpay.sign_type', 'MD5')
+                    'signType'  => Config::getInstance()->get('wxpay.sign_type', 'MD5'),
                 );
                 $return            = Support::signature($return);
                 $return['paySign'] = $return['sign'];
@@ -48,7 +48,7 @@ class Mini extends Fire
                 throw new Exception('Verify signature fail.');
             }
         } else {
-            throw new Exception($result->return_msg);
+            throw new Exception($result->err_code_des ?? $result->return_msg);
         }
     }
 
