@@ -8,6 +8,8 @@ return array(
         'key'        => '8934e7d15453e97507ef794cf7b0519d',
         'sign_type'  => 'HMAC-SHA256', // 签名类型，默认为MD5，支持HMAC-SHA256和MD5。
         'secret'     => '7813490da6f1265e4901ffb80afaa36f',
+        'cert_client' => '', // optional，退款等情况时用到
+        'cert_key'   => '', // optional，退款等情况时用到
         'notify_url' => 'http://pay.johnxu.net/demo/notify_url.php',
         'return_url' => 'http://pay.johnxu.net/demo/return_url.php'
     ),
