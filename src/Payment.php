@@ -1,4 +1,5 @@
 <?php
+
 /**
  * | ---------------------------------------------------------------------------------------------------
  * | Author：johnxu <fsyzxz@163.com>.
@@ -128,5 +129,21 @@ class Payment
         $class = new $namespace;
 
         return $class;
+    }
+
+    /**
+     * 异步回调输出
+     *
+     * @param string $method
+     * @return mixed|\johnux\payment\wxpay\Response|\johnxu\payment\alipay\Response
+     */
+    public function response(string $method = 'alipay')
+    {
+        $namespace = "\\johnxu\\payment\\{$method}\\Response";
+        if (!class_exists($namespace)) {
+            throw new Exception('Response class not found.');
+        }
+
+        return new $namespace;
     }
 }
