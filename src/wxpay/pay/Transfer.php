@@ -35,6 +35,7 @@ class Transfer extends Fire
         Config::getInstance()->set('wxpay.sign_type', 'MD5');
         $params['mch_appid'] = $wxConfig['app_id'];
         $params['mchid']     = $wxConfig['mch_id'];
+        unset($params['sign_type']);
 
         $params = Support::signature($params);
         // 转换成xml
