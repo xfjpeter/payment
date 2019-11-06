@@ -133,8 +133,8 @@ class Support
             $param = file_get_contents( $param );
         }
         $replaceTpl = array(
-            "-----BEGIN PRIVATE KEY-----",
-            "-----END PRIVATE KEY-----",
+            "-----BEGIN RSA PRIVATE KEY-----",
+            "-----END RSA PRIVATE KEY-----",
             "\r",
             "\n",
             "\r\n"
