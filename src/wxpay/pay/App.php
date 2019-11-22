@@ -34,7 +34,7 @@ class App extends Fire
             if (Support::verifySignature((array)$result, $result->sign)) {
                 $return = array(
                     'appid'     => Config::getInstance()->get('wxpay.app_id'),
-                    'partnerid' => Config::getInstance()->get('wxpay_mch_id'),
+                    'partnerid' => Config::getInstance()->get('wxpay.mch_id'),
                     'prepay_id' => $result->prepay_id,
                     'package'   => 'Sign=WXPay',
                     'noncestr'  => Support::getRandStr(),
