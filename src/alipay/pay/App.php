@@ -19,6 +19,7 @@ class App extends Fire
 {
     protected function request(array $params)
     {
+        unset($params['return_url']);
         return http_build_query($params);
     }
 
