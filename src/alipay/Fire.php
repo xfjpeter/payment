@@ -63,7 +63,9 @@ class Fire
 
         $uri .= '?' . http_build_query( $params );
 
-        @header( 'Location:' . $uri );
+		return $uri;
+		// 直接返回 url 地址，在 laravel 中 header 无效
+        // @header( 'Location:' . $uri );
     }
 
     /**
